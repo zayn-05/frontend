@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Source+Code+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-book-open"></i>
+                <h1>LIBRARY<span>PRO</span></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#books-section" class="nav-link active" data-section="books"><i class="fas fa-book"></i> Books</a></li>
+                <li><a href="#members-section" class="nav-link" data-section="members"><i class="fas fa-users"></i> Members</a></li>
+                <li><a href="#loans-section" class="nav-link" data-section="loans"><i class="fas fa-exchange-alt"></i> Loans</a></li>
+                <li><a href="#create-section" class="nav-link" data-section="create"><i class="fas fa-plus-circle"></i> Create</a></li>
+            </ul>
+            <div class="nav-status">
+                <div class="status-indicator online"></div>
+                <span id="api-status">Connecting...</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Books Section -->
+        <section id="books-section" class="content-section active">
+            <div class="section-header">
+                <h2><i class="fas fa-book"></i> Books Management</h2>
+                <div class="section-controls">
+                    <div class="search-box">
+                        <input type="text" id="book-search" placeholder="Search books...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <button class="btn btn-primary" id="refresh-books">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ISBN</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Copies</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="books-table-body">
+                        <!-- Books will be loaded here -->
+                    </tbody>
+                </table>
+                <div class="table-footer">
+                    <div class="pagination">
+                        <button class="btn-pagination" id="prev-page"><i class="fas fa-chevron-left"></i></button>
+                        <span id="page-info">Page 1</span>
+                        <button class="btn-pagination" id="next-page"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="table-stats">
+                        <span id="books-count">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Members Section -->
+        <section id="members-section" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-users"></i> Members Management</h2>
+                <button class="btn btn-primary" id="refresh-members">
+                    <i class="fas fa-sync-alt"></i> Refresh Members
+                </button>
+            </div>
+            
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Joined Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="members-table-body">
+                        <!-- Members will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Loans Section -->
+        <section id="loans-section" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-exchange-alt"></i> Book Loans</h2>
+                <button class="btn btn-primary" id="refresh-loans">
+                    <i class="fas fa-sync-alt"></i> Refresh Loans
+                </button>
+            </div>
+            
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Loan ID</th>
+                            <th>Member</th>
+                            <th>Book</th>
+                            <th>Loaned At</th>
+                            <th>Due At</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="loans-table-body">
+                        <!-- Loans will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Create Section -->
+        <section id="create-section" class="content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-plus-circle"></i> Create New Records</h2>
+                <div class="form-tabs">
+                    <button class="form-tab active" data-form="book-form">New Book</button>
+                    <button class="form-tab" data-form="member-form">New Member</button>
+                    <button class="form-tab" data-form="loan-form">New Loan</button>
+                </div>
+            </div>
+
+            <!-- Book Form -->
+            <form id="book-form" class="creation-form active-form">
+                <h3><i class="fas fa-book-medical"></i> Add New Book</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="isbn">ISBN *</label>
+                        <input type="text" id="isbn" required placeholder="e.g., 978-3-16-148410-0">
+                        <div class="error-message" id="isbn-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title *</label>
+                        <input type="text" id="title" required placeholder="Book title">
+                        <div class="error-message" id="title-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author *</label>
+                        <input type="text" id="author" required placeholder="Author name">
+                        <div class="error-message" id="author-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="copies">Copies *</label>
+                        <input type="number" id="copies" required min="0" value="1">
+                        <div class="error-message" id="copies-error"></div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success btn-submit">
+                    <i class="fas fa-save"></i> Create Book
+                </button>
+                <div id="book-form-message" class="form-message"></div>
+            </form>
+
+            <!-- Member Form -->
+            <form id="member-form" class="creation-form">
+                <h3><i class="fas fa-user-plus"></i> Add New Member</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="member-name">Name *</label>
+                        <input type="text" id="member-name" required placeholder="Full name">
+                        <div class="error-message" id="member-name-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="member-email">Email *</label>
+                        <input type="email" id="member-email" required placeholder="email@example.com">
+                        <div class="error-message" id="member-email-error"></div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success btn-submit">
+                    <i class="fas fa-save"></i> Create Member
+                </button>
+                <div id="member-form-message" class="form-message"></div>
+            </form>
+
+            <!-- Loan Form -->
+            <form id="loan-form" class="creation-form">
+                <h3><i class="fas fa-handshake"></i> Create New Loan</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="loan-member">Member *</label>
+                        <select id="loan-member" required>
+                            <option value="">Select a member</option>
+                        </select>
+                        <div class="error-message" id="loan-member-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loan-book">Book *</label>
+                        <select id="loan-book" required>
+                            <option value="">Select a book</option>
+                        </select>
+                        <div class="error-message" id="loan-book-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="due-date">Due Date *</label>
+                        <input type="date" id="due-date" required>
+                        <div class="error-message" id="due-date-error"></div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success btn-submit">
+                    <i class="fas fa-save"></i> Create Loan
+                </button>
+                <div id="loan-form-message" class="form-message"></div>
+            </form>
+        </section>
+    </main>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Edit Record</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-form">
+                    <!-- Dynamic form fields will be inserted here -->
+                </form>
+                <div id="edit-form-message" class="form-message"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" id="delete-record">Delete</button>
+                <button class="btn btn-primary" id="update-record">Update</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Notification -->
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-text">Operation successful!</span>
+    </div>
+
+    <!-- Backend Configuration -->
+    <div class="config-panel">
+        <div class="config-toggle">
+            <i class="fas fa-server"></i>
+        </div>
+        <div class="config-content">
+            <h4><i class="fas fa-cog"></i> Backend Configuration</h4>
+            <div class="config-group">
+                <label for="api-base-url">API Base URL</label>
+                <input type="text" id="api-base-url" 
+                       placeholder="https://your-backend-api.com">
+                <small>Enter your deployed backend URL</small>
+            </div>
+            <button class="btn btn-primary" id="save-config">
+                <i class="fas fa-save"></i> Save Configuration
+            </button>
+            <div class="config-info">
+                <p><strong>Current API:</strong> <span id="current-api">Not configured</span></p>
+                <p><strong>Status:</strong> <span id="api-status-detailed">Unknown</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
