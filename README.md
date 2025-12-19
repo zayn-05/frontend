@@ -101,18 +101,6 @@ library-frontend
 
 ## 🚢 Deployment
 
-### Netlify Deployment Steps:
-1. **Create** a new site on Netlify
-2. **Upload** the three files or connect to GitHub repository
-3. **No build command** needed
-4. Your site will be live at `https://your-site-name.netlify.app`
-
-### Vercel Deployment Steps:
-1. **Install** Vercel CLI: `npm i -g vercel`
-2. **Run** `vercel` in the project directory
-3. **Follow** the prompts
-4. Your site will be live at `https://your-site-name.vercel.app`
-
 ### GitHub Pages Deployment:
 1. **Create** a new GitHub repository
 2. **Upload** all files
@@ -150,7 +138,7 @@ library-frontend
 | **Icons** | Font Awesome 6.4.0 | Visual elements and indicators |
 | **Fonts** | Google Fonts (Poppins, Roboto Slab) | Typography and readability |
 | **Backend** | Node.js, Express, MongoDB | API and data storage |
-| **Deployment** | Netlify/Vercel (Frontend), Render/Railway (Backend) | Hosting and availability |
+| **Deployment** | GitHub Pages (Frontend), Render (Backend) | Hosting and availability |
 
 ## 🎯 Project Goals
 
