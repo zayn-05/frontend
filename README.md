@@ -85,16 +85,6 @@ library-frontend
 - `renderBooksTable()`: Render books data in table format
 - `renderPagination()`: Create pagination controls
 
-## 📸 Screenshots
-
-| Dashboard | Books Management |
-|-----------|------------------|
-| ![Dashboard](https://via.placeholder.com/300x200/2c3e50/FFFFFF?text=Dashboard+View) | ![Books](https://via.placeholder.com/300x200/3498db/FFFFFF?text=Books+Management) |
-
-| Members Management | Loans Management |
-|-------------------|------------------|
-| ![Members](https://via.placeholder.com/300x200/1abc9c/FFFFFF?text=Members+Management) | ![Loans](https://via.placeholder.com/300x200/9b59b6/FFFFFF?text=Loans+Management) |
-
 ## 🌐 Browser Compatibility
 
 - ✅ Chrome 60+
@@ -141,15 +131,14 @@ library-frontend
 
 ## 📋 Testing Checklist
 
-- [ ] **Dashboard loads** statistics correctly
-- [ ] **Books CRUD** operations work (Create, Read, Update, Delete)
-- [ ] **Members CRUD** operations work
-- [ ] **Loans can be created** and returned
-- [ ] **Search functionality** works for books and members
-- [ ] **Pagination** works correctly
-- [ ] **Form validation** prevents invalid submissions
-- [ ] **Mobile responsive** design works
-- [ ] **Notifications** display properly
+- [✅] **Books CRUD** operations work (Create, Read, Update, Delete)
+- [✅] **Members CRUD** operations work
+- [✅] **Loans can be created** and returned
+- [✅] **Search functionality** works for books and members
+- [✅] **Pagination** works correctly
+- [✅] **Form validation** prevents invalid submissions
+- [✅] **Mobile responsive** design works
+- [✅] **Notifications** display properly
 
 
 ## 📊 Technology Stack
@@ -185,6 +174,7 @@ For questions or issues:
 This project is for educational purposes as part of a full-stack development demonstration.
 
 ## 👤 Author
+   **Morly D. Granado**
 
 **Library Management System** - Full Stack Project
 
